@@ -10,7 +10,8 @@
 --dark-jungle-green: #081c15ff;
 */
 
-body {
-    font-family: 'Open Sans', sans-serif;
-    background-color: #d8f3dcff;
+.signin-form{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
