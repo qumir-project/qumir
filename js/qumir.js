@@ -22,7 +22,7 @@ window.onload = function(){
         console.log('Loaded...');
     }
     else{
-        if(pname === 'signin.html'){
+        if(pname === 'signin.html' || pname === 'signup.html'){
             window.location.replace('/');
         } 
     }
@@ -69,6 +69,57 @@ function signinAction(e){
             }
         });
     }
+}
+
+function signupAction(e){
+    e.preventDefault();
+    var elements = document.getElementById("signup-form").elements;
+    var signupObj ={};
+    for(var i = 0 ; i < elements.length ; i++){
+        var item = elements.item(i);
+        signupObj[item.name] = item.value;
+    }
+
+    if(signupObj.password1 != signupObj.password2){
+        // Password not matching
+        document.getElementById("signup-msg").innerHTML = "Please write matching passwords...";
+    }
+    else{
+        // Signup action through cognito
+        var attList = [];
+		
+		var cognitoObjEmail = {
+			Name : 'email', 
+			Value : signupObj.email
+        };
+
+        var usrname = signupObj.email.split('@');
+        usrname = usrname[0];
+        console.log(usrname);
+        
+        var cognitoAttEmail = new AmazonCognitoIdentity.CognitoUserAttribute(cognitoObjEmail);
+
+        attList.push(cognitoAttEmail);
+
+        // Connection to cognito
+        userPool.signUp(usrname,
+                        signupObj.password1,
+                        attList,
+                        null,
+                        function(err, result){
+			                if (err) {
+				                alert(err.message || JSON.stringify(err));
+				                return;
+			                }
+                            cognitoUser = result.user;
+                            console.log('user name is ' + cognitoUser.getUsername());
+                            //change elements of page
+                            document.getElementById("signup-msg").innerHTML = "Check your email for a verification link";
+        });
+        
+        console.log(attList);
+    }
+    
 }
 
 function signoutAction(){
