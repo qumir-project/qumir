@@ -59,6 +59,8 @@ function checkCORS(){
         //url = 'https://w04co8lo5b.execute-api.us-east-1.amazonaws.com/dev/data?TableName=plants';
         url = 'https://6wpoasstje.execute-api.us-east-1.amazonaws.com/development/items?';
         xhttp.open('GET', url);
+        xhttp.setRequestHeader('Content-Type', 'application/json');
+        xhttp.setRequestHeader('QUMIR-TOKEN', ak);
         xhttp.send();
     });
 }
