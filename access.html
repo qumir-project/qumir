@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q U M I R  -  LOGIN</title>
+    <link rel="stylesheet" href="css/qumir.css">
+    <link rel="stylesheet" href="css/access.css">
+</head>
+<body>
+    <div id='login-wrapper'>
+        <div class="access-form" id="login-form">
+            <form>
+                <input type="email" name="email" id="usrEmail" placeholder="Email address..." autofocus>
+                <input type="password" name="password" id="usrPwd" placeholder="Password...">
+                <input class='button-form' type="submit" value="Login" onclick="loginAction(event)">
+                <span class=info-form>Not register? </span><a id="register-link" href="#">Create an account.</a>
+            </form>
+        </div>
+        <div class="access-form" id="register-form">
+            <form>
+                <input type="email" name="email" id="usrEmail" placeholder="Email address..." autofocus>
+                <input type="password" name="password1" id="usrPassword1" placeholder="password">
+                <input type="password" name="password2" id="usrPassword2" placeholder="password">
+                <input class='button-form' type="submit" value="Register" onclick="registerAction(event)">
+                <span class=info-form>Already registered? </span><a id="login1-link" href="#">Login.</a>
+            </form>
+        </div>
+        <div class="access-form" id="forgot-form">
+            <form>
+                <input type="email" name="email" id="usrEmail" placeholder="Email address..." autofocus>
+                <input class='button-form' type="submit" value="Reset password" onclick="forgotAction(event)">
+                <span class=info-form>Already registered? </span><a id="login2-link" href="#">Login.</a>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="js/libs/amazon-cognito-identity.min.js"></script>
+<script src="js/util.js"></script>
+<script src="js/access.js"></script>
+</html>

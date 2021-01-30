@@ -12,13 +12,13 @@ var poolData = {
     ClientId : _config.cognito.clientId
 }; // Cognito user pool parameters
 var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-var loggedUser = userPool.getCurrentUser();
+var loggedUser = [];
 
 function loginAction(e){
     e.preventDefault();
 
     // Get elements from the form
-    var elements = document.getElementById("login-form").elements;
+    var elements = $1('#login-form').querySelector('form').elements;
     var loginObj ={};
     for(var i = 0 ; i < elements.length ; i++){
         var item = elements.item(i);
@@ -59,3 +59,21 @@ function loginAction(e){
         });
     }
 }
+
+$1('#login1-link').onclick = function(e){
+    $1('#login-form').style.display = 'block';
+    $1('#register-form').style.display = 'none';
+    $1('#forgot-form').style.display = 'none';
+};
+
+$1('#register-link').onclick = function(e){
+    $1('#login-form').style.display = 'none';
+    $1('#register-form').style.display = 'block';
+    $1('#forgot-form').style.display = 'none';
+};
+
+$1('#login2-link').onclick = function(e){
+    $1('#login-form').style.display = 'block';
+    $1('#register-form').style.display = 'none';
+    $1('#forgot-form').style.display = 'none';
+};

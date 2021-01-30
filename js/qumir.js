@@ -11,18 +11,17 @@ var userPool = new AmazonCognitoIdentity.CognitoUserPool({
     UserPoolId : _config.cognito.userPoolId,
     ClientId : _config.cognito.clientId
 });
-var loggedUser = null;
+var loggedUser = userPool.getCurrentUser();
 
 // Page logic
 window.onload = function(){
     var pname = getPageName();
     if(loggedUser == null){
-        console.log(loggedUser);
-        console.log('Loaded...');
+        window.location.replace('/access.html');
     }
     else{
-        if(pname === 'signin.html' || pname === 'signup.html'){
-            window.location.replace('/');
+        if(pname === 'access.html' || pname === 'index.html' || pname === ''){
+            window.location.replace('/main.html');
         } 
     }
 };
