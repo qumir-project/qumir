@@ -9,9 +9,26 @@
 --brunswick-green: #1b4332ff;
 --dark-jungle-green: #081c15ff;
 */
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
 
-.signin-form{
+.form-container{
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    align-items: center;
+    border: solid 1px #b7e4c7ff;
+    border-radius: 0.75em;
+    width:min-content;
+    padding: 1.5em;
+}
+
+body {
+    background-color: #d8f3dcff;
+    color: #1b4332ff;
+    font-family:Arial, Helvetica, sans-serif;
+    height: 100%;
+    margin: 0;
 }

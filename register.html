@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q U M I R  -  REGISTER</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <form id="register-form">
+        <div class="form-container">
+            <div class="form-item">
+                <div class="form-title" id="title">Register</div>
+            </div>
+            <div class="form-item">
+                <input type="email" name="email" id="usrEmail" placeholder="email address..." autofocus>
+            </div>
+            <div class="form-item">
+                <input type="password" name="password1" id="usrPassword1" placeholder="password">
+            </div>
+            <div class="form-item">
+                <input type="password" name="password2" id="usrPassword2" placeholder="password">
+            </div>
+            <div class="form-item">
+                <input type="submit" value="Register" onclick="registerAction(event)">
+            </div>
+            <div class="form-item">
+                <div id="register-msg"></div>
+            </div>
+        </div>
+    </form>
+</body>
+<script src="js/libs/amazon-cognito-identity.min.js"></script>
+<script src="js/util.js"></script>
+<script src="js/register.js"></script>
+</html>
