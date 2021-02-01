@@ -1,0 +1,25 @@
+/*
+--nyanza: #d8f3dcff;
+    --turquoise-green: #b7e4c7ff;
+      --turquoise-green-2: #95d5b2ff;
+        --ocean-green: #74c69dff;
+--ocean-green-2: #52b788ff;
+    --illuminating-emerald: #40916cff;
+      --bottle-green: #2d6a4fff;
+        --brunswick-green: #1b4332ff;
+--dark-jungle-green: #081c15ff;
+*/
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+
+body {
+    background: #b7e4c7ff; /* fallback for old browsers */
+    background: -webkit-linear-gradient(right, #b7e4c7ff, #95d5b2ff);
+    background: -moz-linear-gradient(right, #b7e4c7ff, #95d5b2ff);
+    background: -o-linear-gradient(right, #76b852, #95d5b2ff);
+    background: linear-gradient(to left, #b7e4c7ff, #95d5b2ff);
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;      
+  }
