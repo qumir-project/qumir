@@ -23,7 +23,8 @@ function getPageName(){
 
 function signoutAction(){
     if (loggedUser != null) {
-        loggedUser.signOut();	  
+        loggedUser.signOut();
+        window.location.replace('/index.html');	  
     }
 }
 

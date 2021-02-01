@@ -12,7 +12,15 @@ var poolData = {
     ClientId : _config.cognito.clientId
 }; // Cognito user pool parameters
 var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-var loggedUser = [];
+var loggedUser = userPool.getCurrentUser();
+
+// Page logic
+window.onload = function(){
+    var pname = getPageName();
+    if(loggedUser != null){
+        window.location.replace('/main.html');
+    }
+};
 
 function loginAction(e){
     e.preventDefault();
@@ -51,7 +59,7 @@ function loginAction(e){
         loggedUser.authenticateUser(authDet, {
             onSuccess: function(result){
                 console.log(result);
-                //window.location.reload();
+                window.location.reload();
             },
             onFailure: function(err){
                 console.log(err);
@@ -60,20 +68,83 @@ function loginAction(e){
     }
 }
 
+function registerAction(e){
+    e.preventDefault();
+    var elements = $1('#register-form').querySelector('form').elements;
+    var registerObj ={};
+    for(var i = 0 ; i < elements.length ; i++){
+        var item = elements.item(i);
+        registerObj[item.name] = item.value;
+    }
+    console.log(registerObj);
+
+    if(registerObj.password1 != registerObj.password2){
+        // Password not matching
+        document.getElementById("register-msg").innerHTML = "Please write matching passwords...";
+    }
+    else{
+        // register action through cognito
+        var attList = [];
+		
+		var cognitoObjEmail = {
+			Name : 'email', 
+			Value : registerObj.email
+        };
+
+        var usrname = registerObj.email.split('@');
+        usrname = usrname[0];
+        console.log(usrname);
+        
+        var cognitoAttEmail = new AmazonCognitoIdentity.CognitoUserAttribute(cognitoObjEmail);
+
+        attList.push(cognitoAttEmail);
+
+        // Connection to cognito
+        userPool.signUp(usrname+'',
+                        registerObj.password1,
+                        attList,
+                        null,
+                        function(err, result){
+			                if (err) {
+				                alert(err.message || JSON.stringify(err));
+				                return;
+			                }
+                            cognitoUser = result.user;
+                            alert("Check your email for a verification link");
+                            toggleForm('login');
+        });
+        
+        console.log(attList);
+    }
+    
+}
+
 $1('#login1-link').onclick = function(e){
-    $1('#login-form').style.display = 'block';
-    $1('#register-form').style.display = 'none';
-    $1('#forgot-form').style.display = 'none';
+    toggleForm('login');
 };
 
 $1('#register-link').onclick = function(e){
-    $1('#login-form').style.display = 'none';
-    $1('#register-form').style.display = 'block';
-    $1('#forgot-form').style.display = 'none';
+    toggleForm('register');
 };
 
 $1('#login2-link').onclick = function(e){
-    $1('#login-form').style.display = 'block';
-    $1('#register-form').style.display = 'none';
-    $1('#forgot-form').style.display = 'none';
+    toggleForm('login');
+};
+
+function toggleForm(modo){
+    if(modo === 'login'){
+        $1('#login-form').style.display = 'block';
+        $1('#register-form').style.display = 'none';
+        $1('#forgot-form').style.display = 'none';
+    }
+    else if(modo === 'register'){
+        $1('#login-form').style.display = 'none';
+        $1('#register-form').style.display = 'block';
+        $1('#forgot-form').style.display = 'none';
+    }
+    else if(modo === 'forgot'){
+        $1('#login-form').style.display = 'none';
+        $1('#register-form').style.display = 'none';
+        $1('#forgot-form').style.display = 'block';
+    }
 };
