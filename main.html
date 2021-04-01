@@ -4,17 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QUMIR</title>
-    <link rel="stylesheet" href="css/qumir.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
-    <a href="login.html">Login</a>
-    <a href="register.html">Register</a>
-    <button onclick="signoutAction()">sign out</button>
-    <button onclick="checkCORS()">Check API</button>
+    <div class="w3-bar w3-border-bottom w3-light-grey">
+        <a href="index.html" class="w3-bar-item w3-button"><i class="fas fa-leaf w3-large"></i></a>
+        <a href="#" class="w3-bar-item w3-button"><i class="fas fa-bars w3-large"></i></a>
+        <a href="javascript:checkCORS();" class="w3-bar-item w3-button"><i class="fas fa-vial w3-large"></i></a>
+        <a href="javascript:loadGardenerInfo();" class="w3-bar-item w3-button"><i class="fas fa-check w3-large"></i></a>
+        <a href="javascript:toggleModal();" class="w3-bar-item w3-button"><i class="fas fa-user-circle w3-large"></i></a>
+        <a href="javascript:signoutAction();" class="w3-bar-item w3-button w3-right">Logout</a>
+        
+    </div>
+    <div class="w3-bar w3-border-bottom w3-wide">
+        <span class="w3-margin-left w3-small" style="margin-top: 4px; margin-bottom: 4px;">Gardens</span>
+        <span class="w3-small" style="margin-top: 4px; margin-bottom: 4px;">/</span>
+
+    </div>
+    <div class="w3-panel w3-border w3-margin w3-round-large">
+        <div class="w3-row">
+            <h1>Gardens</h1>
+        </div>
+        <div class="w3-row"></div>
+        <div class="w3-row">
+            <div class="w3-col">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum odio quae earum eligendi, laboriosam quisquam corporis optio laborum non deserunt alias, amet in id numquam recusandae nihil, ab rerum consectetur ducimus quibusdam dicta mollitia eveniet? Quod atque sed magnam beatae similique? A fuga sit aliquid vel unde accusamus voluptatem accusantium nemo suscipit et eveniet quaerat quos consequatur dolorem amet inventore, maxime qui aliquam, iure repudiandae ut consequuntur id? Nobis assumenda ullam, at accusamus, officiis vitae nihil unde asperiores quas, dignissimos nostrum reiciendis! Explicabo necessitatibus, voluptatibus ad quis laboriosam dignissimos quibusdam voluptates optio, corporis sapiente delectus unde accusantium, velit quisquam. Iusto hic nulla accusantium dolorum iure incidunt voluptas repellendus ex vero nihil quam corporis est quisquam nostrum, assumenda voluptatum adipisci illo aperiam aut quas ad? Mollitia, ex molestiae magnam ipsum quae fugit dignissimos voluptatem commodi suscipit sunt accusamus quidem unde quo!</div>
+        </div>
+    </div>
+
+    <div id="usr-modal" class="w3-modal">
+        <div class="w3-modal-content w3-border w3-round-large">
+            <a href="javascript:closeModal('usr-modal');" class="w3-display-topright w3-margin-right"><i class="fas fa-window-close"></i></a>    
+            <div class="w3-container">
+                <h1><i class="fas fa-leaf"></i> QUMIR</h1>
+                <form id="register-form">
+                    <input class="w3-input" type="email" name="email">
+                    <label class="w3-wide">Email</label>
+                    <p></p>
+                    <input class="w3-input" type="password" name="password1">
+                    <label class="w3-wide">Password</label>
+                    <p></p>
+                    <input class="w3-input" type="password" name="password2">
+                    <label class="w3-wide">Confirm password</label>
+                    <p></p>
+                    <button class="w3-button
+                                    w3-block
+                                    w3-border
+                                    w3-round-xlarge" id="btregister">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
-<!-- <script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.16.min.js"></script> -->
+<script src="https://kit.fontawesome.com/ecb37827f5.js" crossorigin="anonymous"></script>
 <script src="js/libs/amazon-cognito-identity.min.js"></script>
 <script src="js/util.js"></script>
-<script src="js/qumir.js"></script>
 <script src="js/main.js"></script>
 </html>

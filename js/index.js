@@ -7,21 +7,20 @@ window._config = {
     },
 };
 
-var userPool = new AmazonCognitoIdentity.CognitoUserPool({
+var poolData = {
     UserPoolId : _config.cognito.userPoolId,
     ClientId : _config.cognito.clientId
-});
+}; // Cognito user pool parameters
+var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 var loggedUser = userPool.getCurrentUser();
 
 // Page logic
 window.onload = function(){
     var pname = getPageName();
-    if(loggedUser == null){
-        window.location.replace('/access.html');
+    if(loggedUser != null){
+        window.location.replace('/main.html');
     }
     else{
-        if(pname === 'access.html' || pname === 'index.html' || pname === ''){
-            window.location.replace('/main.html');
-        } 
+        window.location.replace('/access.html');
     }
 };
