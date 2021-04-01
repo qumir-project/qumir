@@ -2,39 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Q U M I R  -  LOGIN</title>
-    <link rel="stylesheet" href="css/qumir.css">
-    <link rel="stylesheet" href="css/access.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css"> -->
+    <title>Q U M I R - ACCESS</title>
 </head>
-<body>
-    <div id='login-wrapper'>
-        <div class="access-form" id="login-form">
-            <form>
-                <input type="email" name="email" id="usrEmail" placeholder="Email address..." autofocus>
-                <input type="password" name="password" id="usrPwd" placeholder="Password...">
-                <input class='button-form' type="submit" value="Login" onclick="loginAction(event)">
-                <span class=info-form>Not register? </span><a id="register-link" href="#">Create an account.</a>
+<body class="w3-theme">
+    <div class="w3-container">
+        <div class="w3-panel
+                    w3-border
+                    w3-round-large
+                    w3-auto
+                    w3-animate-opacity" style="width: 500px;" id="login-form">
+            <h1><i class="fas fa-leaf"></i> QUMIR</h1>
+            <form id="login-form">
+                <input class="w3-input" type="email" name="email">
+                <label class="w3-wide">Email</label>
+                <p></p>
+                <input class="w3-input" type="password" name="password">
+                <label class="w3-wide">Password</label>
+                <p></p>
+                <button class="w3-button
+                                w3-block
+                                w3-border
+                                w3-round-xlarge" id="btlogin">Login</button>
             </form>
+            <div class="w3-row w3-padding-16 w3-small">
+                <span>Not registered? </span><a href="#" id="register-link">Register.</a>
+            </div>
+            
         </div>
-        <div class="access-form" id="register-form">
-            <form>
-                <input type="email" name="email" id="usrEmail" placeholder="Email address..." autofocus>
-                <input type="password" name="password1" id="usrPassword1" placeholder="password">
-                <input type="password" name="password2" id="usrPassword2" placeholder="password">
-                <input class='button-form' type="submit" value="Register" onclick="registerAction(event)">
-                <span class=info-form>Already registered? </span><a id="login1-link" href="#">Login.</a>
+
+        <div class="w3-panel
+                    w3-border
+                    w3-round-large
+                    w3-auto
+                    w3-animate-opacity" style="width: 500px;" id="register-form">
+            <h1><i class="fas fa-leaf"></i> QUMIR</h1>
+            <form id="register-form">
+                <input class="w3-input" type="email" name="email">
+                <label class="w3-wide">Email</label>
+                <p></p>
+                <input class="w3-input" type="password" name="password1">
+                <label class="w3-wide">Password</label>
+                <p></p>
+                <input class="w3-input" type="password" name="password2">
+                <label class="w3-wide">Confirm password</label>
+                <p></p>
+                <button class="w3-button
+                                w3-block
+                                w3-border
+                                w3-round-xlarge" id="btregister">Register</button>
             </form>
-        </div>
-        <div class="access-form" id="forgot-form">
-            <form>
-                <input type="email" name="email" id="usrEmail" placeholder="Email address..." autofocus>
-                <input class='button-form' type="submit" value="Reset password" onclick="forgotAction(event)">
-                <span class=info-form>Already registered? </span><a id="login2-link" href="#">Login.</a>
-            </form>
+            <div class="w3-row w3-padding-16 w3-small">
+                <span>Already registered? </span><a href="#" id="login-link">Login.</a>
+            </div>
+            
         </div>
     </div>
 </body>
+<script src="https://kit.fontawesome.com/ecb37827f5.js" crossorigin="anonymous"></script>
 <script src="js/libs/amazon-cognito-identity.min.js"></script>
 <script src="js/util.js"></script>
 <script src="js/access.js"></script>

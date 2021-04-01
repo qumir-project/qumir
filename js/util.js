@@ -24,6 +24,7 @@ function getPageName(){
 function signoutAction(){
     if (loggedUser != null) {
         loggedUser.signOut();
+        sessionStorage.clear();
         window.location.replace('/index.html');	  
     }
 }

@@ -20,13 +20,15 @@ window.onload = function(){
     if(loggedUser != null){
         window.location.replace('/main.html');
     }
+    toggleForm('login');
 };
 
-function loginAction(e){
+// Login Action
+$1('#btlogin').onclick = function(e){
     e.preventDefault();
 
     // Get elements from the form
-    var elements = $1('#login-form').querySelector('form').elements;
+    var elements = $('#login-form>*');
     var loginObj ={};
     for(var i = 0 ; i < elements.length ; i++){
         var item = elements.item(i);
@@ -59,24 +61,23 @@ function loginAction(e){
         loggedUser.authenticateUser(authDet, {
             onSuccess: function(result){
                 console.log(result);
-                window.location.reload();
+                window.location.replace('/main.html');
             },
             onFailure: function(err){
                 console.log(err);
             }
         });
     }
-}
+  };
 
-function registerAction(e){
+$1('#btregister').onclick = function(e){
     e.preventDefault();
-    var elements = $1('#register-form').querySelector('form').elements;
+    var elements = $('#register-form>*');
     var registerObj ={};
     for(var i = 0 ; i < elements.length ; i++){
         var item = elements.item(i);
         registerObj[item.name] = item.value;
     }
-    console.log(registerObj);
 
     if(registerObj.password1 != registerObj.password2){
         // Password not matching
@@ -116,10 +117,9 @@ function registerAction(e){
         
         console.log(attList);
     }
-    
-}
+};
 
-$1('#login1-link').onclick = function(e){
+$1('#login-link').onclick = function(e){
     toggleForm('login');
 };
 
@@ -127,24 +127,13 @@ $1('#register-link').onclick = function(e){
     toggleForm('register');
 };
 
-$1('#login2-link').onclick = function(e){
-    toggleForm('login');
-};
-
 function toggleForm(modo){
     if(modo === 'login'){
         $1('#login-form').style.display = 'block';
         $1('#register-form').style.display = 'none';
-        $1('#forgot-form').style.display = 'none';
     }
     else if(modo === 'register'){
         $1('#login-form').style.display = 'none';
         $1('#register-form').style.display = 'block';
-        $1('#forgot-form').style.display = 'none';
     }
-    else if(modo === 'forgot'){
-        $1('#login-form').style.display = 'none';
-        $1('#register-form').style.display = 'none';
-        $1('#forgot-form').style.display = 'block';
-    }
-};
+}
