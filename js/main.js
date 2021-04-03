@@ -17,11 +17,10 @@ var ak = '';
 
 // Page logic
 window.onload = function(){
-    var pname = getPageName();
     if(loggedUser == null){
         window.location.replace('/access.html');
     }
-    else if( sessionStorage.getItem('ak') == null){
+    else if( sessionStorage.getItem('ak') === null){
         
         
         new Promise(function fetchCurrentAuthToken(resolve, reject) {
@@ -43,21 +42,13 @@ window.onload = function(){
             sessionStorage.setItem('ak',ak);
 
             // Load data and render it 
-            loadGardens();
-
-            //url = 'https://w04co8lo5b.execute-api.us-east-1.amazonaws.com/dev/data?TableName=plants';
-            //url = 'https://mn6ujt3rtl.execute-api.us-east-1.amazonaws.com/development/items?';
-            //xhttp.open('GET', url);
-            //xhttp.withCredentials = true;
-            //xhttp.setRequestHeader('Content-Type', 'application/json');
-            //xhttp.setRequestHeader('QUMIR-TOKEN', ak);
-            //xhttp.send();
+            loadGardenerInfo();
         });
     }
     else{
         ak = sessionStorage.getItem('ak');
         // Load data and render it 
-        loadGardens();
+        loadGardenerInfo();
     }
 };
 
@@ -102,47 +93,82 @@ function checkCORS(){
     });
 }
 
-async function loadGardenerInfo(){
+function loadGardenerInfo(){
     var url = 'https://mn6ujt3rtl.execute-api.us-east-1.amazonaws.com/development/items/getgardenerinfo?env=prod';
     var url2 = 'https://mn6ujt3rtl.execute-api.us-east-1.amazonaws.com/development/items?';
-    const response = await fetch(url, {
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
-        //mode: 'cors', // no-cors, *cors, same-origin
-        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        //credentials: 'same-origin', // include, *same-origin, omit
-        headers: {
-            'Content-Type': 'application/json',
-            'QUMIR-TOKEN': ak
-            //'Access-Control-Allow-Origin' : '*'
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-        }//,
-        //redirect: 'follow', // manual, *follow, error
-        //referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-        //body: JSON.stringify(data) // body data type must match "Content-Type" header
-    });
-    var out_var = await response.json();
-    console.log(out_var);
-    var status = response.status;
-    var ok = response.ok;
-    console.log('Status: '+status+' OK: '+ok);
 
-    // Check the output
-    if(ok){
-        if(out_var.out_res === 'USRCRT'){
-            // We need th complete the user info
-            console.log('usuario...');
+    fetch(url, {
+        method : 'GET',
+        cache : 'no-cache',
+        headers : {
+            'Content-Type' : 'application/json',
+            'QUMIR-TOKEN' : ak
+        }
+    })
+    .then(response => response.json()) // Pura notación de promesas... Equivalente a { return response.json() }
+    .then(data => {
+        if(data.out_res === 'USRCRT'){
+            // Please provide me with your name
+            toggleModal();
         }
         else{
-            // Render the gardens
-            console.log('Render the gardens...');
+            // render the garden
+            renderGardens(data);
         }
-    }
+    })
+    .catch(() => {
+        sessionStorage.removeItem('ak');
+    });
 }
 
-// Load Gardens - Render Gardener's gardens
-function loadGardens(){
-    console.log('loading... data');
+function setGardenerInfo(name, lastname){
+    // SET THE NAME OF THE GARDENER THE VERY FIRST TIME
+
+    var url = 'https://mn6ujt3rtl.execute-api.us-east-1.amazonaws.com/development/items/setgardenerinfo?env=prod&mode=new&firstname='+name+'&lastname='+lastname;
+    fetch(url, {
+        method : 'POST',
+        headers : {
+            'Content-Type' : 'application/json',
+            'QUMIR-TOKEN' : ak
+        }
+    })
+    .catch(e => {
+        console.log('ERROR: '+e)
+    })
 }
+
+$1('#btsave').onclick = (e) => {
+    e.preventDefault();
+    let elements = $('#name-form>*');
+    let nameObj ={};
+    for(var i = 0 ; i < elements.length ; i++){
+        var item = elements.item(i);
+        nameObj[item.name] = item.value;
+    }
+
+    if(nameObj.nombre.length >= 3){
+        console.log('Guardar...'+nameObj.nombre);
+        let usrname = nameObj.nombre
+            .replace('<','')
+            .replace('>','')
+            .replace('/','')
+            .replace(':','')
+            .replace(';','')
+            .replace('@','')
+            .replace(')','')
+            .replace('(','')
+            .replace('{','')
+            .replace('}','')
+            .replace('[','')
+            .replace(']','');
+        setGardenerInfo(usrname, usrname);
+
+        setTimeout(() => {
+            window.location.replace('/main.html')
+        },
+        3000);
+    }
+};
 
 function toggleModal(){
     document.getElementById('usr-modal').style.display='block';
@@ -150,4 +176,10 @@ function toggleModal(){
 
 function closeModal(objectId){
     document.getElementById(objectId).style.display = 'none';
+}
+
+function renderGardens(data){
+    let gardener = data.gardener_info;
+    let gardens = data.gardens_info;
+    console.log('Gardener: '+gardener.firstname.S+' | Gardens: '+gardens);
 }

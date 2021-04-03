@@ -13,7 +13,7 @@
         <a href="javascript:checkCORS();" class="w3-bar-item w3-button"><i class="fas fa-vial w3-large"></i></a>
         <a href="javascript:loadGardenerInfo();" class="w3-bar-item w3-button"><i class="fas fa-check w3-large"></i></a>
         <a href="javascript:toggleModal();" class="w3-bar-item w3-button"><i class="fas fa-user-circle w3-large"></i></a>
-        <a href="javascript:signoutAction();" class="w3-bar-item w3-button w3-right">Logout</a>
+        <a href="javascript:signoutAction();" class="w3-bar-item w3-button w3-right"><i class="fas fas fas fa-sign-out-alt"></i></a>
         
     </div>
     <div class="w3-bar w3-border-bottom w3-wide">
@@ -22,34 +22,27 @@
 
     </div>
     <div class="w3-panel w3-border w3-margin w3-round-large">
-        <div class="w3-row">
-            <h1>Gardens</h1>
-        </div>
-        <div class="w3-row"></div>
-        <div class="w3-row">
-            <div class="w3-col">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum odio quae earum eligendi, laboriosam quisquam corporis optio laborum non deserunt alias, amet in id numquam recusandae nihil, ab rerum consectetur ducimus quibusdam dicta mollitia eveniet? Quod atque sed magnam beatae similique? A fuga sit aliquid vel unde accusamus voluptatem accusantium nemo suscipit et eveniet quaerat quos consequatur dolorem amet inventore, maxime qui aliquam, iure repudiandae ut consequuntur id? Nobis assumenda ullam, at accusamus, officiis vitae nihil unde asperiores quas, dignissimos nostrum reiciendis! Explicabo necessitatibus, voluptatibus ad quis laboriosam dignissimos quibusdam voluptates optio, corporis sapiente delectus unde accusantium, velit quisquam. Iusto hic nulla accusantium dolorum iure incidunt voluptas repellendus ex vero nihil quam corporis est quisquam nostrum, assumenda voluptatum adipisci illo aperiam aut quas ad? Mollitia, ex molestiae magnam ipsum quae fugit dignissimos voluptatem commodi suscipit sunt accusamus quidem unde quo!</div>
-        </div>
+        <div class="w3-row" id="m1"></div>
+        <div class="w3-row" id="m2"></div>
+        <div class="w3-row" id="m3"></div>
     </div>
 
     <div id="usr-modal" class="w3-modal">
         <div class="w3-modal-content w3-border w3-round-large">
             <a href="javascript:closeModal('usr-modal');" class="w3-display-topright w3-margin-right"><i class="fas fa-window-close"></i></a>    
             <div class="w3-container">
-                <h1><i class="fas fa-leaf"></i> QUMIR</h1>
-                <form id="register-form">
-                    <input class="w3-input" type="email" name="email">
-                    <label class="w3-wide">Email</label>
-                    <p></p>
-                    <input class="w3-input" type="password" name="password1">
-                    <label class="w3-wide">Password</label>
-                    <p></p>
-                    <input class="w3-input" type="password" name="password2">
-                    <label class="w3-wide">Confirm password</label>
+                <h3><i class="fas fa-leaf"></i> Just one more step!</h3>
+                <p>I hate to treat as an operator. You have a name and I´d like to know it. &#128517;</p>
+                <form id="name-form">
+                    <input class="w3-input" type="text" name="nombre">
+                    <label class="w3-wide">Name</label>
                     <p></p>
                     <button class="w3-button
                                     w3-block
                                     w3-border
-                                    w3-round-xlarge" id="btregister">Register</button>
+                                    w3-round-xlarge" id="btsave">Save</button>
+                    <div class="w3-row w3-padding-16 w3-small">
+                    </div>
                 </form>
             </div>
         </div>
